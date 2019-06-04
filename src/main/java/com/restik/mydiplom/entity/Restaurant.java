@@ -2,14 +2,13 @@ package com.restik.mydiplom.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Table
 @Entity
-public class Visitors {
+@Table
+public class Restaurant {
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -17,9 +16,15 @@ public class Visitors {
     private int id;
 
     private String name;
-    private String surname;
-    private String login;
+    private String adress;
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "restaurant",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            orphanRemoval = true)
+    private List<Tables> tablesList = new ArrayList<>();
+
+
 
     public int getId() {
         return id;
@@ -37,20 +42,12 @@ public class Visitors {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getAdress() {
+        return adress;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     public String getPhoneNumber() {
@@ -60,4 +57,15 @@ public class Visitors {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public List<Tables> getTablesList() {
+        return tablesList;
+    }
+
+    public void setTablesList(List<Tables> tablesList) {
+        this.tablesList = tablesList;
+    }
+
+
+
 }

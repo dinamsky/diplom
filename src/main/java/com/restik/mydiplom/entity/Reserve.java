@@ -22,6 +22,31 @@ public class Reserve {
     @OneToOne (mappedBy =  "reserve")
     private Visitors visitor = new Visitors();
 
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private Tables tables;
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getReserveStart() {
+        return reserveStart;
+    }
+
+    public void setReserveStart(LocalDateTime reserveStart) {
+        this.reserveStart = reserveStart;
+    }
+
+    public Visitors getVisitor() {
+        return visitor;
+    }
+
+    public void setVisitor(Visitors visitor) {
+        this.visitor = visitor;
+    }
 }
