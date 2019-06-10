@@ -2,10 +2,7 @@ package com.restik.mydiplom.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table
 @Entity
@@ -20,6 +17,18 @@ public class Visitors {
     private String surname;
     private String login;
     private String phoneNumber;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reserve_id", referencedColumnName = "id")
+    private Reserve reserve;
+
+    public Reserve getReserve() {
+        return reserve;
+    }
+
+    public void setReserve(Reserve reserve) {
+        this.reserve = reserve;
+    }
 
     public int getId() {
         return id;

@@ -2,6 +2,11 @@ package com.restik.mydiplom.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +23,20 @@ public class Restaurant {
     private String name;
     private String adress;
     private String phoneNumber;
+    private int tablesQty;
 
     @OneToMany(mappedBy = "restaurant",
             cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             orphanRemoval = true)
     private List<Tables> tablesList = new ArrayList<>();
 
+    public int getTablesQty() {
+        return tablesQty;
+    }
 
+    public void setTablesQty(int tablesQty) {
+        this.tablesQty = tablesQty;
+    }
 
     public int getId() {
         return id;

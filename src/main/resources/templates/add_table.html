@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация столов</title>
+</head>
+<body>
+
+<h3>Форма добавления столов</h3>
+
+
+
+<form method="post" th:action="@{/restaurant/table/add}" th:object="${tables}">
+
+
+    <div>
+        <select name="restaurantId">
+            <option th:each="restaurant : ${restaurants}"
+                    th:value="${restaurant.id}"
+                    th:utext="${restaurant.name}">
+            </option>
+        </select>
+    </div>
+
+
+
+    <p>Ввод количества мест</p>
+
+    <label>Введите количество мест для стола  : <input th:field="*{visitorsVolume}" type="text"></label>
+
+
+    <p><input type="submit" value="Добавить"></p>
+</form>
+
+<p><a href="/">На главную</a></p>
+
+
+</body>
+</html>

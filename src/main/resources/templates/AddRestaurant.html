@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Регистрация ресторана</title>
 </head>
 <body>
 
-<h3>Форма добавления университета</h3>
+<h3>Форма добавления ресторана</h3>
 
 <p th:if="${addInfo}">Ресторан
     <span  th:text="${addInfo}" style="color:red"></span>
@@ -14,11 +14,18 @@
 </p>
 
 <form method="post" th:action="@{/restaurant/add}" th:object="${restaurant}">
-    <label>Название ресторана: <input th:field="*{name}" type="text"></label>
+    <label>Название ресторана: <input th:field="*{name}" type="text"></label></br>
+    <hr>
+    <label>Адрес: <input th:field="*{adress}" type="text"></label>
+    <label>Номер телефона: <input th:field="*{phoneNumber}" type="text"></label>
+    <label>Количество столов: <input th:field="*{tablesQty}" type="text"></label>
+
     <p><input type="submit" value="Добавить"></p>
 </form>
 
-<p><a href="/">На главную</a></p>
+<li><a href="/restaurant/table/add">Добавление столов</a></li>
 
+<p><a href="/">На главную</a></p>
+<script src="/js/tables.js"></script>
 </body>
 </html>

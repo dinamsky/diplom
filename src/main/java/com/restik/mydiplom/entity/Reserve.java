@@ -3,6 +3,11 @@ package com.restik.mydiplom.entity;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,12 +24,14 @@ public class Reserve {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime reserveStart;
 
-    @OneToOne (mappedBy =  "reserve")
-    private Visitors visitor = new Visitors();
-
-    @OneToOne
-    @JoinColumn(nullable = false)
+    @ManyToOne
+    @JoinTable(name = "event_student",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
     private Tables tables;
+
+    @OneToOne (mappedBy =  "reserve")
+    private Visitors visitor;// = new Visitors();
 
     public int getId() {
         return id;
@@ -48,5 +55,13 @@ public class Reserve {
 
     public void setVisitor(Visitors visitor) {
         this.visitor = visitor;
+    }
+
+    public Tables getTables() {
+        return tables;
+    }
+
+    public void setTables(Tables tables) {
+        this.tables = tables;
     }
 }
