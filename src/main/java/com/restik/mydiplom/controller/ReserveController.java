@@ -44,10 +44,13 @@ public class ReserveController {
         Restaurant restaurant = restaurantRepository.findById(Integer.valueOf(restaurantId)).get();
         Reserve reserveNew = reserveRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume), dateReserve);
 
-        Visitors visitors =
-        reserveNew.setVisitor(v);
+        Visitors visitor1 = new Visitors();
+        visitor1.setVisitorName(visitorName);
+        reserveNew.setVisitor(visitor1);
+        visitor1.setReserve(reserve);
+        reserve.setReserveStart(dateReserve);
 
-
+visitorRepository.save(visitor1);
         reserveRepository.save(reserveNew);
         //model.addAttribute("addInfo", reserve.getVisitorName());
 
