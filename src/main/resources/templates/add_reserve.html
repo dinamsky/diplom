@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Бронирование стола</title>
+</head>
+<body>
+
+<h3>Ввод данных для резерва</h3>
+
+
+
+<form method="post" th:action="@{/reserve/add}" th:object="${reserve}">
+
+    <label>ВВедите Имя <input th:field="*{visitorName}" type="text"></label></br>
+
+    <div>
+        <select visitorName="restaurantId">
+            <option th:each="restaurant : ${restaurants}"
+                    th:value="${restaurant.restaurantId}"
+                    th:utext="${restaurant.visitorName}">
+            </option>
+        </select>
+    </div>
+
+    <label>Количество людей <input th:field="*{visitorsVolume}" type="text"></label></br>
+
+    <p>Ввод даты и времени: <input th:field="*{reserveStart}" type="datetime-local" visitorName="calendar">
+
+    <!--<p><input type="button" restaurantId="add_reserve" value="Показать свободные столы"></p>-->
+    <!--<div restaurantId="reserve"></div>-->
+
+    <hr>
+
+    <p><input type="submit" value="Проверить бронь"></p>
+
+    <p th:if="${reserveInfo}">Бронь стола в ресторане
+        <span  th:text="${reserveInfo}" style="color:red"></span>
+        сделана
+    </p>
+
+
+</form>
+
+
+<p><a href="/">На главную</a></p>
+<!--<script src="/js/tables.js"></script>-->
+</body>
+</html>

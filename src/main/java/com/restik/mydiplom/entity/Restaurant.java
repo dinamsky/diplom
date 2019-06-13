@@ -18,9 +18,9 @@ public class Restaurant {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int id;
+    private int restaurantId;
 
-    private String name;
+    private String restaurantName;
     private String adress;
     private String phoneNumber;
     private int tablesQty;
@@ -38,20 +38,20 @@ public class Restaurant {
         this.tablesQty = tablesQty;
     }
 
-    public int getId() {
-        return id;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
-    public String getName() {
-        return name;
+    public String getRestaurantName() {
+        return restaurantName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
     public String getAdress() {

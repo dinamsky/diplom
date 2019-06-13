@@ -14,10 +14,10 @@
 
 
     <div>
-        <select name="restaurantId">
+        <select visitorName="restaurantId">
             <option th:each="restaurant : ${restaurants}"
-                    th:value="${restaurant.id}"
-                    th:utext="${restaurant.name}">
+                    th:value="${restaurant.restaurantId}"
+                    th:utext="${restaurant.visitorName}">
             </option>
         </select>
     </div>
@@ -31,6 +31,9 @@
 
     <p><input type="submit" value="Добавить"></p>
 </form>
+
+
+
 
 <p><a href="/">На главную</a></p>
 

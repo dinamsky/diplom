@@ -11,7 +11,7 @@
 	<groupId>com.restik</groupId>
 	<artifactId>my-diplom</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>my-diplom</name>
+	<visitorName>my-diplom</visitorName>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

@@ -21,7 +21,7 @@ public class Tables {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int id;
+    private int tableId;
 
     //private String tableNum;
     private int visitorsVolume;
@@ -41,12 +41,12 @@ public class Tables {
         this.restaurant = restaurant;
     }
 
-    public int getId() {
-        return id;
+    public int getTableId() {
+        return tableId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTableId(int tableId) {
+        this.tableId = tableId;
     }
 
 

@@ -11,15 +11,15 @@ public class Visitors {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int id;
+    private int visitorId;
 
-    private String name;
+    private String visitorName;
     private String surname;
     private String login;
     private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reserve_id", referencedColumnName = "id")
+    @JoinColumn(name = "reserve_id", referencedColumnName = "visitorId")
     private Reserve reserve;
 
     public Reserve getReserve() {
@@ -30,20 +30,20 @@ public class Visitors {
         this.reserve = reserve;
     }
 
-    public int getId() {
-        return id;
+    public int getVisitorId() {
+        return visitorId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setVisitorId(int visitorId) {
+        this.visitorId = visitorId;
     }
 
-    public String getName() {
-        return name;
+    public String getVisitorName() {
+        return visitorName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setVisitorName(String visitorName) {
+        this.visitorName = visitorName;
     }
 
     public String getSurname() {

@@ -18,12 +18,13 @@
     <hr>
     <label>Адрес: <input th:field="*{adress}" type="text"></label>
     <label>Номер телефона: <input th:field="*{phoneNumber}" type="text"></label>
-    <label>Количество столов: <input th:field="*{tablesQty}" type="text"></label>
+    <label>Количество столов: <input id="tables_count" th:field="*{tablesQty}" type="text"></label>
 
-    <p><input type="submit" value="Добавить"></p>
+    <p><input type="button" id="add_table" value="Добавить описание столов"></p>
+    <div id="tables"></div>
+    <p><input type="submit" value="Добавить ресторан"></p>
 </form>
 
-<li><a href="/restaurant/table/add">Добавление столов</a></li>
 
 <p><a href="/">На главную</a></p>
 <script src="/js/tables.js"></script>
