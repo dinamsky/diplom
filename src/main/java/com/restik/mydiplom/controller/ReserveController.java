@@ -50,12 +50,12 @@ public class ReserveController {
     public String submitForm(@ModelAttribute Reserve reserve, Model model,
                              //@RequestParam(name = "restaurantId") int restaurantId,
                              @RequestParam(name = "visitorsVolume") int visitorsVolume,
-                             @RequestParam(name = "dateReserve") LocalDateTime dateReserve
+                             @RequestParam(name = "reserveStart") LocalDateTime reserveStart
 
 
     ) {
-        dateReserveDeltaMinus = dateReserve.minusHours(2);
-        dateReserveDeltaPlus = dateReserve.plusHours(2);
+        dateReserveDeltaMinus = reserveStart.minusHours(2);
+        dateReserveDeltaPlus = reserveStart.plusHours(2);
 
         int restaurantId = 2;
 
