@@ -9,21 +9,21 @@
 <h3>Ввод данных для резерва</h3>
 
 
+<!--<form method="get" th:action="@{/reserve/add}" th:object="${restaurant}"></form>-->
+<form action="#"  th:action="@{/reserve/add}" th:object="${reserve}" method="post">
 
-<form method="post" th:action="@{/reserve/add}" th:object="${reserve}">
-
-    <label>ВВедите Имя <input th:field="*{visitorName}" type="text"></label></br>
-
-    <div>
-        <select visitorName="restaurantId">
+    <!--<label>ВВедите Имя <input th:field="*{visitorName}" type="text"></label></br>-->
+    <div th:object="${restaurant}">
+        <select name="restaurantId">
             <option th:each="restaurant : ${restaurants}"
                     th:value="${restaurant.restaurantId}"
-                    th:utext="${restaurant.visitorName}">
+                    th:utext="${restaurant.restaurantName}">
             </option>
         </select>
     </div>
 
-    <label>Количество людей <input th:field="*{visitorsVolume}" type="text"></label></br>
+
+    <!--<label>Количество людей <input th:field="*{visitorsVolume}" type="text"></label></br>-->
 
     <p>Ввод даты и времени: <input th:field="*{reserveStart}" type="datetime-local" visitorName="calendar">
 

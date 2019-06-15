@@ -2,9 +2,11 @@ package com.restik.mydiplom.controller;
 
 import com.restik.mydiplom.entity.Reserve;
 import com.restik.mydiplom.entity.Restaurant;
+import com.restik.mydiplom.entity.Tables;
 import com.restik.mydiplom.entity.Visitors;
 import com.restik.mydiplom.repositories.ReserveRepository;
 import com.restik.mydiplom.repositories.RestaurantRepository;
+import com.restik.mydiplom.repositories.TableRepository;
 import com.restik.mydiplom.repositories.VisitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDateTime;
 
 @Controller
+@RequestMapping(value = "/reserve/add")
 public class ReserveController {
     @Autowired
     ReserveRepository reserveRepository;
@@ -25,14 +28,17 @@ public class ReserveController {
     RestaurantRepository restaurantRepository;
     @Autowired
     VisitorRepository visitorRepository;
+    @Autowired
+    TableRepository tableRepository;
     private LocalDateTime dateReserveDeltaMinus;
     private LocalDateTime dateReserveDeltaPlus;
 
     @RequestMapping(value = "/reserve/add", method = RequestMethod.GET)
     public String showForm (Model model){
-        model.addAttribute("restaurant", reserveRepository.findAll());
-        model.addAttribute("visitors", new Visitors());
+        model.addAttribute("restaurant", restaurantRepository.findAll());
         model.addAttribute("reserve", new Reserve());
+//        model.addAttribute("visitors", new Visitors());
+//        model.addAttribute("reserve", new Reserve());
         return "add_reserve";
     }
 
@@ -40,8 +46,8 @@ public class ReserveController {
     public String submitForm (@ModelAttribute Reserve reserve, Model model,
                               @RequestParam(name = "restaurantId") int restaurantId,
                               @RequestParam(name = "visitorsVolume") int visitorsVolume,
-                              @RequestParam(name = "dateReserve") LocalDateTime dateReserve,
-                              @RequestParam(name = "visitorName") String visitorName
+                              @RequestParam(name = "dateReserve") LocalDateTime dateReserve
+
 
     ) {
         dateReserveDeltaMinus= dateReserve.minusHours(2);
@@ -51,17 +57,17 @@ public class ReserveController {
 
         //Restaurant restaurant = restaurantRepository.findById(Integer.valueOf(restaurantId)).get();
 //        Reserve reserveNew = reserveRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume),dateReserveDeltaMinus, dateReserveDeltaPlus).get();
-        Reserve reserveNew = reserveRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume)).get();
+    //    Tables tables = tableRepository.findFreeTable(Integer.valueOf(restaurantId)).get();
+        Tables tables = tableRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume)).get();
 
-        Visitors visitor1 = new Visitors();
-        visitor1.setVisitorName(visitorName);
-        reserveNew.setVisitor(visitor1);
-        visitor1.setReserve(reserve);
+//        Visitors visitor1 = new Visitors();
+//        visitor1.setVisitorName(visitorName);
+        reserve.setTables(tables);
+//        visitor1.setReserve(reserve);
         reserve.setReserveStart(dateReserve);
 
-        visitorRepository.save(visitor1);
-        reserveRepository.save(reserveNew);
-        //model.addAttribute("addInfo", reserve.getVisitorName());
+//        visitorRepository.save(visitor1);
+        reserveRepository.save(reserve);
 
         return "add_reserve";
     }

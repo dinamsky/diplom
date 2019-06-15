@@ -1,3 +1,4 @@
+/*
 package com.restik.mydiplom.controller;
 
 import com.restik.mydiplom.entity.Reserve;
@@ -75,3 +76,4 @@ public class TableController {
     }
 
 }
+*/

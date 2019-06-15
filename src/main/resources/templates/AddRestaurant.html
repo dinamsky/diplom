@@ -14,7 +14,7 @@
 </p>
 
 <form method="post" th:action="@{/restaurant/add}" th:object="${restaurant}">
-    <label>Название ресторана: <input th:field="*{name}" type="text"></label></br>
+    <label>Название ресторана: <input th:field="*{restaurantName}" type="text"></label></br>
     <hr>
     <label>Адрес: <input th:field="*{adress}" type="text"></label>
     <label>Номер телефона: <input th:field="*{phoneNumber}" type="text"></label>

@@ -1,7 +1,6 @@
 package com.restik.mydiplom.entity;
 
 
-
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -27,10 +26,13 @@ public class Tables {
     private int visitorsVolume;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurantId")
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "tables")
+    @OneToMany(mappedBy = "tables",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            orphanRemoval = true)
     private List<Reserve> reserveList = new ArrayList<>();
 
     public Restaurant getRestaurant() {
@@ -65,7 +67,6 @@ public class Tables {
     public void setReserveList(List<Reserve> reserveList) {
         this.reserveList = reserveList;
     }
-
 
 
 }
