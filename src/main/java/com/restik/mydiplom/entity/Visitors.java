@@ -19,7 +19,7 @@ public class Visitors {
     private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reserve_id", referencedColumnName = "visitorId")
+    //@JoinColumn(name = "reserve_id", referencedColumnName = "visitorId")
     private Reserve reserve;
 
     public Reserve getReserve() {

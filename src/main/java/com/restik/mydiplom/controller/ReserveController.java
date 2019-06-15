@@ -7,6 +7,7 @@ import com.restik.mydiplom.repositories.ReserveRepository;
 import com.restik.mydiplom.repositories.RestaurantRepository;
 import com.restik.mydiplom.repositories.VisitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +25,8 @@ public class ReserveController {
     RestaurantRepository restaurantRepository;
     @Autowired
     VisitorRepository visitorRepository;
+    private LocalDateTime dateReserveDeltaMinus;
+    private LocalDateTime dateReserveDeltaPlus;
 
     @RequestMapping(value = "/reserve/add", method = RequestMethod.GET)
     public String showForm (Model model){
@@ -41,8 +44,14 @@ public class ReserveController {
                               @RequestParam(name = "visitorName") String visitorName
 
     ) {
-        Restaurant restaurant = restaurantRepository.findById(Integer.valueOf(restaurantId)).get();
-        Reserve reserveNew = reserveRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume), dateReserve);
+        dateReserveDeltaMinus= dateReserve.minusHours(2);
+        dateReserveDeltaPlus= dateReserve.plusHours(2);
+
+
+
+        //Restaurant restaurant = restaurantRepository.findById(Integer.valueOf(restaurantId)).get();
+//        Reserve reserveNew = reserveRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume),dateReserveDeltaMinus, dateReserveDeltaPlus).get();
+        Reserve reserveNew = reserveRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume)).get();
 
         Visitors visitor1 = new Visitors();
         visitor1.setVisitorName(visitorName);
@@ -50,7 +59,7 @@ public class ReserveController {
         visitor1.setReserve(reserve);
         reserve.setReserveStart(dateReserve);
 
-visitorRepository.save(visitor1);
+        visitorRepository.save(visitor1);
         reserveRepository.save(reserveNew);
         //model.addAttribute("addInfo", reserve.getVisitorName());
 

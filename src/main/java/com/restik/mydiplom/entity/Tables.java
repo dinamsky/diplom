@@ -23,7 +23,7 @@ public class Tables {
     @GenericGenerator(name = "increment", strategy = "increment")
     private int tableId;
 
-    //private String tableNum;
+
     private int visitorsVolume;
 
     @ManyToOne

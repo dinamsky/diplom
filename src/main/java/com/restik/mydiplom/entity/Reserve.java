@@ -25,9 +25,6 @@ public class Reserve {
     private LocalDateTime reserveStart;
 
     @ManyToOne
-//    @JoinTable(name = "event_student",
-//            joinColumns = @JoinColumn(name = "event_id"),
-//            inverseJoinColumns = @JoinColumn(name = "student_id"))
     private Tables tables;
 
     @OneToOne (mappedBy =  "reserve")
