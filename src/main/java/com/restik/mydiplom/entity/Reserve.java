@@ -26,9 +26,19 @@ public class Reserve {
     private Tables tables;
 
     @OneToOne(mappedBy =  "reserve")
-    private Visitors visitor;// = new Visitors();
+    private Visitors visitor;
 
-    private int reserveVisitorsQty;
+//    @OneToOne
+//    @JoinColumn(nullable = false)
+//    private Restaurant restaurant;
+//
+//    public Restaurant getRestaurant() {
+//        return restaurant;
+//    }
+//
+//    public void setRestaurant(Restaurant restaurant) {
+//        this.restaurant = restaurant;
+//    }
 
     public int getId() {
         return id;

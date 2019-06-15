@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDateTime;
 
 @Controller
-@RequestMapping(value = "/reserve/add")
 public class ReserveController {
     @Autowired
     ReserveRepository reserveRepository;
@@ -33,31 +32,36 @@ public class ReserveController {
     private LocalDateTime dateReserveDeltaMinus;
     private LocalDateTime dateReserveDeltaPlus;
 
+    private int visitorsVolume;
+    private LocalDateTime dateReserve;
+
+
     @RequestMapping(value = "/reserve/add", method = RequestMethod.GET)
-    public String showForm (Model model){
+    public String showForm(Model model) {
+
         model.addAttribute("restaurant", restaurantRepository.findAll());
+        //  model.addAttribute("tables", tableRepository.findAll());
         model.addAttribute("reserve", new Reserve());
-//        model.addAttribute("visitors", new Visitors());
-//        model.addAttribute("reserve", new Reserve());
+
         return "add_reserve";
     }
 
     @RequestMapping(value = "/reserve/add", method = RequestMethod.POST)
-    public String submitForm (@ModelAttribute Reserve reserve, Model model,
-                              @RequestParam(name = "restaurantId") int restaurantId,
-                              @RequestParam(name = "visitorsVolume") int visitorsVolume,
-                              @RequestParam(name = "dateReserve") LocalDateTime dateReserve
+    public String submitForm(@ModelAttribute Reserve reserve, Model model,
+                             //@RequestParam(name = "restaurantId") int restaurantId,
+                             @RequestParam(name = "visitorsVolume") int visitorsVolume,
+                             @RequestParam(name = "dateReserve") LocalDateTime dateReserve
 
 
     ) {
-        dateReserveDeltaMinus= dateReserve.minusHours(2);
-        dateReserveDeltaPlus= dateReserve.plusHours(2);
+        dateReserveDeltaMinus = dateReserve.minusHours(2);
+        dateReserveDeltaPlus = dateReserve.plusHours(2);
 
+        int restaurantId = 2;
 
-
-        //Restaurant restaurant = restaurantRepository.findById(Integer.valueOf(restaurantId)).get();
+//        Restaurant restaurant = restaurantRepository.findById(Integer.valueOf(restaurantId)).get();
 //        Reserve reserveNew = reserveRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume),dateReserveDeltaMinus, dateReserveDeltaPlus).get();
-    //    Tables tables = tableRepository.findFreeTable(Integer.valueOf(restaurantId)).get();
+//        Tables tables = tableRepository.findFreeTable(Integer.valueOf(restaurantId)).get();
         Tables tables = tableRepository.findFreeTable(Integer.valueOf(restaurantId), Integer.valueOf(visitorsVolume)).get();
 
 //        Visitors visitor1 = new Visitors();

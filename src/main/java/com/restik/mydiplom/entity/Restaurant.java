@@ -31,6 +31,11 @@ public class Restaurant {
     //@OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private List<Tables> tablesList = new ArrayList<>();
 
+//    @OneToMany(mappedBy = "restaurant",
+//    cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+//    orphanRemoval = true)
+//    private List<Reserve> reserveList = new ArrayList<>();
+
     public int getTablesQty() {
         return tablesQty;
     }
