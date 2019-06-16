@@ -1,19 +1,11 @@
 package com.restik.mydiplom.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
+/// отключен
 
 
-import java.time.LocalDateTime;
-
-
-@Table
-@Entity
 public class Reserve {
 
-    @Id
+   /* @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private int id;
@@ -26,7 +18,7 @@ public class Reserve {
     private Tables tables;
 
     @OneToOne(mappedBy =  "reserve")
-    private Visitors visitor;
+    private Visitor visitor;
 
 //    @OneToOne
 //    @JoinColumn(nullable = false)
@@ -56,11 +48,11 @@ public class Reserve {
         this.reserveStart = reserveStart;
     }
 
-    public Visitors getVisitor() {
+    public Visitor getVisitor() {
         return visitor;
     }
 
-    public void setVisitor(Visitors visitor) {
+    public void setVisitor(Visitor visitor) {
         this.visitor = visitor;
     }
 
@@ -70,5 +62,5 @@ public class Reserve {
 
     public void setTables(Tables tables) {
         this.tables = tables;
-    }
+    }*/
 }

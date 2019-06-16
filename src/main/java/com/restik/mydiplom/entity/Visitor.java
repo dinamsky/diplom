@@ -4,10 +4,24 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Table
-@Entity
-public class Visitors {
 
+@Entity
+@Table(name="visitor_tbl")
+@PrimaryKeyJoinColumn(name="personID")
+public class Visitor extends Person{
+
+    public Visitor() {
+    }
+}
+
+
+
+
+
+
+
+
+    /*
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
@@ -70,3 +84,4 @@ public class Visitors {
         this.phoneNumber = phoneNumber;
     }
 }
+*/

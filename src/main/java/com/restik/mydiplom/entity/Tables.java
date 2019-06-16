@@ -13,9 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Table
-@Entity
+// не работает
+
+/*@Table
+@Entity*/
 public class Tables {
+/*
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -68,5 +71,6 @@ public class Tables {
         this.reserveList = reserveList;
     }
 
+*/
 
 }
