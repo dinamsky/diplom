@@ -18,14 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class TableController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="addTable.html", method = RequestMethod.GET)
     public String initializeForm(@ModelAttribute("tableAdd") Person user) {
 
         return "successRestaurantAdded";
     }
 
 
-    @RequestMapping(value="addTable.htm",method = RequestMethod.POST)
+    @RequestMapping(value="addTable.html",method = RequestMethod.POST)
     protected ModelAndView doSubmitAction(@ModelAttribute("addingTable") TableOfRestaurant restTable, HttpServletRequest request) throws Exception {
 //		validator.validate(user, result);
 //		if (result.hasErrors()) {
@@ -70,7 +70,7 @@ public class TableController {
 
 }
 
-    @RequestMapping(value="/deleteTable.htm",method = RequestMethod.POST)
+    @RequestMapping(value="/deleteTable.html",method = RequestMethod.POST)
     protected String occupiedTable(@ModelAttribute("deletingTable") TableOfRestaurant restTable,HttpServletRequest request) throws Exception {
 
         String restName=request.getParameter("restName");
@@ -87,7 +87,7 @@ public class TableController {
         return "successRestaurantAdded";
     }
 
-    @RequestMapping(value="/updateVacancy.htm",method = RequestMethod.POST)
+    @RequestMapping(value="/updateVacancy.html",method = RequestMethod.POST)
     protected String vacantTable(@ModelAttribute("updatingTableVacancy") TableOfRestaurant restTable,HttpServletRequest request) throws Exception {
 
         String restName=request.getParameter("restName");

@@ -1,8 +1,10 @@
 package com.restik.mydiplom.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -10,8 +12,13 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name="personID")
 public class Visitor extends Person{
 
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime reserveStart;
+
     public Visitor() {
     }
+
 }
 
 

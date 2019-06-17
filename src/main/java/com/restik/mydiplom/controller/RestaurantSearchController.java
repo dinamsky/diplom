@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/restaurantSearchResult.htm")
+@RequestMapping("/restaurantSearch.html")
 public class RestaurantSearchController {
 
     @RequestMapping(method = RequestMethod.GET)

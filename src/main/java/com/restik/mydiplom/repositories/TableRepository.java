@@ -1,3 +1,4 @@
+/*
 package com.restik.mydiplom.repositories;
 
 import com.restik.mydiplom.entity.Reserve;
@@ -39,3 +40,4 @@ public interface TableRepository extends CrudRepository<Tables, Integer> {
     );
 
 }
+*/

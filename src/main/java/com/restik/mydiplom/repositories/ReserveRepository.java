@@ -1,3 +1,4 @@
+/*
 package com.restik.mydiplom.repositories;
 
 import com.restik.mydiplom.entity.Reserve;
@@ -11,3 +12,4 @@ import java.util.Optional;
 public interface ReserveRepository extends CrudRepository<Reserve, Integer> {
 
 }
+*/
