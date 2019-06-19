@@ -84,7 +84,8 @@ public class TableController {
 //			System.out.println("Table avialability is"+avail);
         // DAO.close();
 
-        return "successRestaurantAdded";
+        return "test";
+//        return "successRestaurantAdded";
     }
 
     @RequestMapping(value="/updateVacancy.html",method = RequestMethod.POST)
@@ -101,7 +102,8 @@ public class TableController {
 //			System.out.println("Table avialability is"+avail);
         // DAO.close();
 
-        return "successRestaurantAdded";
+        return "test";
+//        return "successRestaurantAdded";
     }
 }
     /*

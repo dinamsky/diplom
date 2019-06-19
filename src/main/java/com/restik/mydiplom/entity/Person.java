@@ -1,11 +1,16 @@
 package com.restik.mydiplom.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="person_tbl")
 @Inheritance(strategy= InheritanceType.JOINED)
 public class Person {
+
 
     @Id
     @GeneratedValue

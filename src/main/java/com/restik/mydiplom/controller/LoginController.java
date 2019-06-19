@@ -24,7 +24,8 @@ public class LoginController {
 //	}
     @RequestMapping(method = RequestMethod.GET)
     public String initializeForm(@ModelAttribute("logPerson") Person person) {
-        return "userHome";
+        return "test";
+//        return "userHome";
     }
 
     @RequestMapping(method = RequestMethod.POST)

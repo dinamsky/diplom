@@ -22,10 +22,11 @@ public class RestaurantController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String initializeForm(@ModelAttribute("restAdd") Person user) {
-        return "successRestaurantAdded";
+        return "test";
+//        return "successRestaurantAdded";
     }
 
-    @RequestMapping(value = "addRestaurant.htm", method = RequestMethod.POST)
+    @RequestMapping(value = "addRestaurant.html", method = RequestMethod.POST)
     protected ModelAndView doSubmitAction(@ModelAttribute("restAdd") Restaurant rest, HttpServletRequest request) throws Exception {
 //		validator.validate(user, result);
 //		if (result.hasErrors()) {

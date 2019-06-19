@@ -33,7 +33,7 @@ public class AdminController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String initializeForm(@ModelAttribute("regUser") AdminOfRestaurant restAdmin) {
+    public String initializeForm(@ModelAttribute("regAdmin") AdminOfRestaurant restAdmin) {
         return "home";
     }
 }

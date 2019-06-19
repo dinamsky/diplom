@@ -29,7 +29,8 @@ public class ReserveTableController {
 //			RestaurantTable avail=tableDAO.delete(restTable);
 //			System.out.println("Table avialability is"+avail);
         // DAO.close();
-        return "successRestaurantAdded";
+        return "test";
+//        return "successRestaurantAdded";
     }
 }
 

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("registerUser.htm")
 public class VisitorController {
 //	@Autowired
 //	@Qualifier("userValidator")
@@ -21,17 +20,14 @@ public class VisitorController {
 //		binder.setValidator(validator);
 //	}
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/registerUser", method = RequestMethod.GET)
     public String initializeForm(@ModelAttribute("regUser") Person user) {
-        return "home";
+        System.out.print("regUserGet");
+        return "add_user";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    protected String doSubmitAction(@ModelAttribute("regUser") Visitor user) throws Exception {
-//		validator.validate(user, result);
-//		if (result.hasErrors()) {
-//			return "addUserForm";
-//		}
+    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    protected String doSubmitAction(@ModelAttribute("regUser") Visitor user) {
 
         try {
             System.out.print("test");
