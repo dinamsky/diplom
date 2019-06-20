@@ -5,7 +5,7 @@ import com.restik.mydiplom.dao.RestaurantDAO;
 import com.restik.mydiplom.dao.TableDAO;
 import com.restik.mydiplom.entity.Person;
 import com.restik.mydiplom.entity.Restaurant;
-import com.restik.mydiplom.entity.TableOfRestaurant;
+import com.restik.mydiplom.entity.Tables;
 import com.restik.mydiplom.exception.ProjException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,7 +26,7 @@ public class TableController {
 
 
     @RequestMapping(value="addTable.html",method = RequestMethod.POST)
-    protected ModelAndView doSubmitAction(@ModelAttribute("addingTable") TableOfRestaurant restTable, HttpServletRequest request) throws Exception {
+    protected ModelAndView doSubmitAction(@ModelAttribute("addingTable") Tables restTable, HttpServletRequest request) throws Exception {
 //		validator.validate(user, result);
 //		if (result.hasErrors()) {
 //			return "addUserForm";
@@ -42,13 +42,13 @@ public class TableController {
         //HttpSession session = request.getSession();
         //System.out.print("test");
         TableDAO tableDAO = new TableDAO();
-        TableOfRestaurant restTab = tableDAO.fetchMyRestaurantTable(tableNumber);
+        Tables restTab = tableDAO.fetchMyRestaurantTable(tableNumber);
         //System.out.print("test1");
         //Restaurant rest= (Restaurant)session.getAttribute("restSessionObj");
         //Restaurant rest = (Restaurant) session.getAttribute("restaurant");
 
         if(restTab == null){
-            TableOfRestaurant avail=tableDAO.create(restTable.getTableNo(),rest);
+            Tables avail=tableDAO.create(restTable.getTableNo(),rest);
             System.out.println("Table avialability is"+avail);
             mv.addObject("tableAdded",avail);
             mv.setViewName("successRestaurantAdded");
@@ -71,7 +71,7 @@ public class TableController {
 }
 
     @RequestMapping(value="/deleteTable.html",method = RequestMethod.POST)
-    protected String occupiedTable(@ModelAttribute("deletingTable") TableOfRestaurant restTable,HttpServletRequest request) throws Exception {
+    protected String occupiedTable(@ModelAttribute("deletingTable") Tables restTable, HttpServletRequest request) throws Exception {
 
         String restName=request.getParameter("restName");
         RestaurantDAO restDAO=new RestaurantDAO();
@@ -89,7 +89,7 @@ public class TableController {
     }
 
     @RequestMapping(value="/updateVacancy.html",method = RequestMethod.POST)
-    protected String vacantTable(@ModelAttribute("updatingTableVacancy") TableOfRestaurant restTable,HttpServletRequest request) throws Exception {
+    protected String vacantTable(@ModelAttribute("updatingTableVacancy") Tables restTable, HttpServletRequest request) throws Exception {
 
         String restName=request.getParameter("restName");
         RestaurantDAO restDAO=new RestaurantDAO();

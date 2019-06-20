@@ -1,25 +1,26 @@
 package com.restik.mydiplom.dao;
 
 import com.restik.mydiplom.entity.Restaurant;
-import com.restik.mydiplom.entity.TableOfRestaurant;
+import com.restik.mydiplom.entity.Tables;
 import com.restik.mydiplom.exception.ProjException;
+import com.restik.mydiplom.repositories.TablesRep;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class TableDAO extends DAO{
+public class TableDAO{
+    @Autowired
+    TablesRep tablesRep;
 
     public TableDAO(){
 
     }
 
-    public TableOfRestaurant create(int tableNo, Restaurant restaurant)
-            throws ProjException {
-        try {
-            begin();
-            System.out.println("inside TableDAO");
+    public Tables create(int tableNo, Restaurant restaurant)
+    {
 
 
-            TableOfRestaurant restTable = new TableOfRestaurant();
+            Tables restTable = new Tables();
 
             restTable.setTableNo(tableNo);
             restTable.setTableStatus("vacant");
@@ -27,20 +28,14 @@ public class TableDAO extends DAO{
             //restAdmin.setRestaurant(rest);
 
             //getSession().merge(restAdmin);
-            getSession().merge(restTable);
-            commit();
+            tablesRep.save(restTable);
+
             return restTable;
-        } catch (HibernateException e) {
-            rollback();
-            //throw new AdException("Could not create restaurant " + restName, e);
-            throw new ProjException("Exception while creating restaurant: " + e.getMessage());
-        }
+
     }
 
     public int update(int tableNo,String tableStatus, Restaurant rest)
-            throws ProjException {
-        try {
-            begin();
+             {
 
 
             Query q = getSession().createQuery("update RestaurantTable set tableStatus =:tableStatus where tableNo =:tableNo");
@@ -49,17 +44,10 @@ public class TableDAO extends DAO{
             int result = q.executeUpdate();
 
 
-            //RestaurantTable restTable = restTable.getTableNo();
-            //getSession().delete(restTable);
 
-            commit();
             return result;
 
-        } catch (HibernateException e) {
-            rollback();
-            throw new ProjException("Could not update table occupancy " , e);
 
-        }
     }
 
     public int updateVacancy(int tableNo,String tableStatus, Restaurant rest)
@@ -112,13 +100,13 @@ public class TableDAO extends DAO{
         }
     }
 
-    public TableOfRestaurant fetchMyRestaurantTable(int tableNo)
+    public Tables fetchMyRestaurantTable(int tableNo)
     {
         try {
             begin();
             Query q = getSession().createQuery("from RestaurantTable where tableNo=:tableNo");
             q.setParameter("tableNo",tableNo);
-            TableOfRestaurant restaurantTable =(TableOfRestaurant) q.uniqueResult();
+            Tables restaurantTable =(Tables) q.uniqueResult();
             commit();
             return restaurantTable;
 

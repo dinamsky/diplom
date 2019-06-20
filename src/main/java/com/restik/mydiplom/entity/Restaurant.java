@@ -25,16 +25,16 @@ public class Restaurant {
     private AdminOfRestaurant restAdmin;
 
     @OneToMany(fetch=FetchType.EAGER, mappedBy="restaurant",cascade=CascadeType.ALL)
-    List<TableOfRestaurant> restTable = new ArrayList<TableOfRestaurant>();
+    List<Tables> restTable = new ArrayList<Tables>();
 
 
     public Restaurant(){
     }
 
-    public List<TableOfRestaurant> getRestTable() {
+    public List<Tables> getRestTable() {
         return restTable;
     }
-    public void setRestTable(List<TableOfRestaurant> restTable) {
+    public void setRestTable(List<Tables> restTable) {
         this.restTable = restTable;
     }
 

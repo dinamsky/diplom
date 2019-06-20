@@ -4,7 +4,7 @@ package com.restik.mydiplom.controller;
 import com.restik.mydiplom.dao.RestaurantDAO;
 import com.restik.mydiplom.dao.TableDAO;
 import com.restik.mydiplom.entity.Restaurant;
-import com.restik.mydiplom.entity.TableOfRestaurant;
+import com.restik.mydiplom.entity.Tables;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ReserveTableController {
 
     @RequestMapping(value = "/reserveTable.htm", method = RequestMethod.POST)
-    protected String occupiedTable(@ModelAttribute("reserve") TableOfRestaurant restTable, HttpServletRequest request) throws Exception {
+    protected String occupiedTable(@ModelAttribute("reserve") Tables restTable, HttpServletRequest request) throws Exception {
 
         int tableNo = Integer.parseInt(request.getParameter("tableNo"));
         String restName = request.getParameter("restName");

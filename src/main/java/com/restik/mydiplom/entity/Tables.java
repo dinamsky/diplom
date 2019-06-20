@@ -1,76 +1,54 @@
 package com.restik.mydiplom.entity;
 
-
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
-
-// не работает
-
-/*@Table
-@Entity*/
+@Entity
+@Table(name="restaurant_table_tbl")
 public class Tables {
-/*
-
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private int tableId;
+    @GeneratedValue
+    @Column(name="tableID",unique=true,nullable=false)
+    private int tableID;
 
+    @Column(name="tableNo")
+    private int tableNo;
 
-    private int visitorsVolume;
+    @Column(name="tableStatus")
+    private String tableStatus;
 
-    @ManyToOne
-    //@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurantId")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="restID")
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "tables",
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            orphanRemoval = true)
-    private List<Reserve> reserveList = new ArrayList<>();
+
+    public Tables(){
+    }
+
+    public int getTableNo() {
+        return tableNo;
+    }
+    public void setTableNo(int tableNo) {
+        this.tableNo = tableNo;
+    }
 
     public Restaurant getRestaurant() {
         return restaurant;
     }
-
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
 
-    public int getTableId() {
-        return tableId;
+    public int getTableID() {
+        return tableID;
+    }
+    public void setTableID(int tableID) {
+        this.tableID = tableID;
     }
 
-    public void setTableId(int tableId) {
-        this.tableId = tableId;
+    public String getTableStatus() {
+        return tableStatus;
     }
-
-
-    public int getVisitorsVolume() {
-        return visitorsVolume;
+    public void setTableStatus(String tableStatus) {
+        this.tableStatus = tableStatus;
     }
-
-    public void setVisitorsVolume(int visitorsVolume) {
-        this.visitorsVolume = visitorsVolume;
-    }
-
-    public List<Reserve> getReserveList() {
-        return reserveList;
-    }
-
-    public void setReserveList(List<Reserve> reserveList) {
-        this.reserveList = reserveList;
-    }
-
-*/
-
 }

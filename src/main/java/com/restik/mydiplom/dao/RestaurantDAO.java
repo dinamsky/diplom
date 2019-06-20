@@ -3,88 +3,50 @@ package com.restik.mydiplom.dao;
 import com.restik.mydiplom.entity.AdminOfRestaurant;
 import com.restik.mydiplom.entity.Restaurant;
 import com.restik.mydiplom.exception.ProjException;
+import com.restik.mydiplom.repositories.AdminRep;
+import com.restik.mydiplom.repositories.RestaurantRep;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class RestaurantDAO extends DAO {
+public class RestaurantDAO  {
+    @Autowired
+    RestaurantRep restaurantRep;
+    @Autowired
+    AdminRep adminRep;
 
     public RestaurantDAO(){
     }
 
-    public Restaurant create(String restName, AdminOfRestaurant restAdmin)
-            throws ProjException {
-        try {
-            begin();
-            System.out.println("inside DAO");
+    public Restaurant create(String restName, AdminOfRestaurant restAdmin){
+
 
             Restaurant rest = new Restaurant();
             rest.setRestName(restName);
             rest.setRestAdmin(restAdmin);
             restAdmin.setRestaurant(rest);
-
-            getSession().merge(restAdmin);
-
-            commit();
+            adminRep.save(restAdmin);
+            restaurantRep.save(rest);
             return rest;
-        } catch (HibernateException e) {
-            rollback();
-            //throw new AdException("Could not create restaurant " + restName, e);
-            throw new ProjException("Exception while creating restaurant: " + e.getMessage());
-        }
+
     }
 
-    public List<Restaurant> getAll()
-            throws ProjException {
-        try {
-            begin();
-            // TODO: 16.06.2019
-            Query q = getSession().createQuery("from Restaurant");
-            //Restaurant restaurant =(Restaurant) q.uniqueResult();
-            List<Restaurant> result = q.list();
-
-            commit();
-            return  result;
-
-        } catch (HibernateException e) {
-            rollback();
-            throw new ProjException("Could not find match " + e.getMessage());
-        }
+    public List<Restaurant> getAll(){
+         return (List<Restaurant>) restaurantRep.findAll();
     }
 
-    public Restaurant getMyRestaurant(AdminOfRestaurant restAdmin)
-            throws ProjException {
-        try {
-            begin();
-            Query q = getSession().createQuery("from Restaurant where restAdminID=:restAdminID  ");
-            q.setParameter("restAdminID", restAdmin.getPersonID());
-            Restaurant restaurant =(Restaurant) q.uniqueResult();
+    public Restaurant getMyRestaurant(AdminOfRestaurant restAdmin){
 
-            commit();
-            return restaurant;
+            return (Restaurant) restaurantRep.findByRestAdmin(restAdmin);
 
-        } catch (HibernateException e) {
-            rollback();
-            throw new ProjException("Could not find match " + e.getMessage());
-        }
     }
 
     public Restaurant fetchMyRestaurant(String restName)
     {
-        try {
-            begin();
-            Query q = getSession().createQuery("from Restaurant where restName=:restName");
-            q.setParameter("restName",restName);
-            Restaurant restaurant =(Restaurant) q.uniqueResult();
 
-            commit();
-            return restaurant;
-
-        } catch (HibernateException e) {
-            rollback();
-            // throw new ProjException("Could not find match " + e.getMessage());
-            return null;
+            return  restaurantRep.findByRestName(restName);
         }
     }
-}
+

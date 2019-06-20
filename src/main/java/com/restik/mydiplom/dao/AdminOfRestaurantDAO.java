@@ -3,10 +3,15 @@ package com.restik.mydiplom.dao;
 import com.restik.mydiplom.entity.AdminOfRestaurant;
 import com.restik.mydiplom.entity.Person;
 import com.restik.mydiplom.exception.ProjException;
+import com.restik.mydiplom.repositories.AdminRep;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class AdminOfRestaurantDAO extends DAO {
+public class AdminOfRestaurantDAO {
+
+    @Autowired
+    AdminRep adminRep;
 
     public AdminOfRestaurantDAO() {
 
@@ -14,51 +19,29 @@ public class AdminOfRestaurantDAO extends DAO {
 
     public AdminOfRestaurant create(String firstName, String lastName, String username, String password, String roleType) throws ProjException {
 
-        if (findRestAdmin(username)) {
+        if (adminRep.findByUsername(username)!=null) {
             System.out.println("Username already exists");
             return null;
         } else {
-            try {
-                begin();
-                System.out.println("inside DAO");
+
+
                 AdminOfRestaurant restAd = new AdminOfRestaurant();
                 restAd.setFirstName(firstName);
                 restAd.setLastName(lastName);
                 restAd.setUsername(username);
                 restAd.setPassword(password);
                 restAd.setRoleType(roleType);
-                getSession().save(restAd);
+                adminRep.save(restAd);
 
-                commit();
+
                 return restAd;
-            } catch (HibernateException e) {
-                rollback();
-                throw new ProjException("Exception while creating user: " + e.getMessage());
-            }
-        }
-    }
+
+    }}
 
     public void delete(AdminOfRestaurant restAd)
-            throws ProjException {
-        try {
-            begin();
-            getSession().delete(restAd);
-            commit();
-        } catch (HibernateException e) {
-            rollback();
-            throw new ProjException("Could not delete user " + restAd.getUsername(), e);
-        }
+    {adminRep.delete(restAd);
+
     }
 
-    public boolean findRestAdmin(String username) {
-        begin();
-        Query q = getSession().createQuery("from Person where username=:username");
-        q.setParameter("username", username);
-        Person person = (Person) q.uniqueResult();
-        if (person != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 }
