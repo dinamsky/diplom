@@ -7,6 +7,7 @@ import com.restik.mydiplom.entity.Person;
 import com.restik.mydiplom.entity.Restaurant;
 import com.restik.mydiplom.entity.Tables;
 import com.restik.mydiplom.exception.ProjException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TableController {
+    @Autowired
+    TableDAO tableDAO;
+    @Autowired
+    RestaurantDAO restDAO;
 
     @RequestMapping(value="addTable.html", method = RequestMethod.GET)
     public String initializeForm(@ModelAttribute("tableAdd") Person user) {
@@ -32,40 +37,39 @@ public class TableController {
 //			return "addUserForm";
 //		}
     ModelAndView mv = new ModelAndView();
-		try {
+//		try {
         String restName=request.getParameter("restName");
         int tableNumber = Integer.parseInt(request.getParameter("tableNo"));
 
-        RestaurantDAO restDAO=new RestaurantDAO();
         Restaurant rest=restDAO.fetchMyRestaurant(restName);
 
         //HttpSession session = request.getSession();
         //System.out.print("test");
-        TableDAO tableDAO = new TableDAO();
-        Tables restTab = tableDAO.fetchMyRestaurantTable(tableNumber);
+
+      //  Tables restTab = tableDAO.fetchMyRestaurantTable(tableNumber);
         //System.out.print("test1");
         //Restaurant rest= (Restaurant)session.getAttribute("restSessionObj");
         //Restaurant rest = (Restaurant) session.getAttribute("restaurant");
 
-        if(restTab == null){
-            Tables avail=tableDAO.create(restTable.getTableNo(),rest);
-            System.out.println("Table avialability is"+avail);
-            mv.addObject("tableAdded",avail);
-            mv.setViewName("successRestaurantAdded");
-            return mv;
-            // DAO.close();
-        }
-        else{
-            mv.setViewName("successRestaurantAdded");
-            System.out.println("You already have this table added to the system");
-            return mv;
-        }
-    }
-		catch (ProjException e) {
-        System.out.println("Exception: " + e.getMessage());
+      //  if(restTab == null){
+//            Tables avail=tableDAO.create(restTable.getTableNo(),rest);
+//            System.out.println("Table avialability is"+avail);
+//            mv.addObject("tableAdded",avail);
+//            mv.setViewName("successRestaurantAdded");
+//            return mv;
+//            // DAO.close();
+//        }
+//        else{
+//            mv.setViewName("successRestaurantAdded");
+//            System.out.println("You already have this table added to the system");
+//            return mv;
+//        }
+//    }
+//		catch (ProjException e) {
+//        System.out.println("Exception: " + e.getMessage());
         mv.setViewName("successRestaurantAdded");
         return mv;
-    }
+//    }
 
 
 }
@@ -74,11 +78,11 @@ public class TableController {
     protected String occupiedTable(@ModelAttribute("deletingTable") Tables restTable, HttpServletRequest request) throws Exception {
 
         String restName=request.getParameter("restName");
-        RestaurantDAO restDAO=new RestaurantDAO();
+
         Restaurant rest=restDAO.fetchMyRestaurant(restName);
-        TableDAO tableDAO = new TableDAO();
-        int rowsUpdated=tableDAO.update(restTable.getTableNo(), restTable.getTableStatus(), rest);
-        System.out.print(rowsUpdated);
+
+     //   int rowsUpdated=tableDAO.update(restTable.getTableNo(), restTable.getTableStatus(), rest);
+      //  System.out.print(rowsUpdated);
 
 //			RestaurantTable avail=tableDAO.delete(restTable);
 //			System.out.println("Table avialability is"+avail);
@@ -92,11 +96,11 @@ public class TableController {
     protected String vacantTable(@ModelAttribute("updatingTableVacancy") Tables restTable, HttpServletRequest request) throws Exception {
 
         String restName=request.getParameter("restName");
-        RestaurantDAO restDAO=new RestaurantDAO();
+
         Restaurant rest=restDAO.fetchMyRestaurant(restName);
-        TableDAO tableDAO = new TableDAO();
-        int rowsUpdated=tableDAO.updateVacancy(restTable.getTableNo(), restTable.getTableStatus(), rest);
-        System.out.print(rowsUpdated);
+
+       // int rowsUpdated=tableDAO.updateVacancy(restTable.getTableNo(), restTable.getTableStatus(), rest);
+      //  System.out.print(rowsUpdated);
 
 //			RestaurantTable avail=tableDAO.delete(restTable);
 //			System.out.println("Table avialability is"+avail);

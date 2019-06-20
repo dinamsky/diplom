@@ -5,6 +5,7 @@ import com.restik.mydiplom.dao.RestaurantDAO;
 import com.restik.mydiplom.dao.TableDAO;
 import com.restik.mydiplom.entity.Restaurant;
 import com.restik.mydiplom.entity.Tables;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,18 +15,23 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ReserveTableController {
+    @Autowired
+    RestaurantDAO restDAO;
+    @Autowired
+    TableDAO tableDAO;
+
 
     @RequestMapping(value = "/reserveTable.htm", method = RequestMethod.POST)
     protected String occupiedTable(@ModelAttribute("reserve") Tables restTable, HttpServletRequest request) throws Exception {
 
         int tableNo = Integer.parseInt(request.getParameter("tableNo"));
         String restName = request.getParameter("restName");
-        RestaurantDAO restDAO = new RestaurantDAO();
+
         Restaurant rest = restDAO.fetchMyRestaurant(restName);
-        TableDAO tableDAO = new TableDAO();
+
         //RestaurantTable restaurantTable = tableDAO.fetchMyRestaurantTable(Integer.parseInt((tableNo)));
-        int rowsUpdated = tableDAO.updateUserTable(tableNo, restTable.getTableStatus(), rest);
-        System.out.print(rowsUpdated);
+      //  int rowsUpdated = tableDAO.updateUserTable(tableNo, restTable.getTableStatus(), rest);
+       // System.out.print(rowsUpdated);
 //			RestaurantTable avail=tableDAO.delete(restTable);
 //			System.out.println("Table avialability is"+avail);
         // DAO.close();

@@ -7,6 +7,7 @@ import com.restik.mydiplom.entity.AdminOfRestaurant;
 import com.restik.mydiplom.entity.Person;
 import com.restik.mydiplom.entity.Restaurant;
 import com.restik.mydiplom.exception.ProjException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class RestaurantController {
+@Autowired
+RestaurantDAO restDAO;
 
     @RequestMapping(method = RequestMethod.GET)
     public String initializeForm(@ModelAttribute("restAdd") Person user) {
@@ -36,7 +39,7 @@ public class RestaurantController {
         try {
             HttpSession session = request.getSession();
             System.out.print("test");
-            RestaurantDAO restDAO = new RestaurantDAO();
+
             System.out.print("test1");
             AdminOfRestaurant restAd = (AdminOfRestaurant) session.getAttribute("person");
             Restaurant re = restDAO.getMyRestaurant(restAd);
@@ -53,7 +56,7 @@ public class RestaurantController {
                 return mv;
             }
             // DAO.close();
-        } catch (ProjException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
             mv.addObject("myRestaurant", null);
             mv.setViewName("restAdminHome");
@@ -69,7 +72,7 @@ public class RestaurantController {
 
         try {
             HttpSession session = request.getSession();
-            RestaurantDAO restDAO = new RestaurantDAO();
+
             AdminOfRestaurant restAd = (AdminOfRestaurant) session.getAttribute("person");
 
             Restaurant myRest = restDAO.getMyRestaurant(restAd);
@@ -82,7 +85,7 @@ public class RestaurantController {
                 System.out.println("Please add a restaurant to the system");
                 return mv;
             }
-        } catch (ProjException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
             mv.addObject("myRestaurant", null);
             mv.setViewName("restAdminHome");

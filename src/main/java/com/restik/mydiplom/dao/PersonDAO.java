@@ -6,7 +6,9 @@ import com.restik.mydiplom.repositories.PersonRep;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PersonDAO {
     @Autowired
     PersonRep personRep;

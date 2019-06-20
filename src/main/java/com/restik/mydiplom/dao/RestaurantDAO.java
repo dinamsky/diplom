@@ -8,9 +8,10 @@ import com.restik.mydiplom.repositories.RestaurantRep;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class RestaurantDAO  {
     @Autowired
     RestaurantRep restaurantRep;

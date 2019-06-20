@@ -3,6 +3,7 @@ package com.restik.mydiplom.controller;
 import com.restik.mydiplom.dao.PersonDAO;
 import com.restik.mydiplom.entity.Person;
 import com.restik.mydiplom.exception.ProjException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/login.htm")
 public class LoginController {
+
+    @Autowired
+    PersonDAO personDAO;
     //	@Autowired
 //	@Qualifier("userValidator")
 //	UserValidator validator;
@@ -37,7 +41,7 @@ public class LoginController {
 
         try {
             System.out.print("test");
-            PersonDAO personDAO = new PersonDAO();
+
             System.out.print("test1");
 
             HttpSession session = request.getSession();
@@ -54,7 +58,7 @@ public class LoginController {
                 System.out.println("Username does not exist");
                 return "home";
             }
-        } catch (ProjException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
         }
         return "home";

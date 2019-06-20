@@ -5,6 +5,7 @@ import com.restik.mydiplom.dao.RestaurantDAO;
 import com.restik.mydiplom.entity.Person;
 import com.restik.mydiplom.entity.Restaurant;
 import com.restik.mydiplom.exception.ProjException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/restaurantSearch.html")
 public class RestaurantSearchController {
-
+@Autowired
+RestaurantDAO restDAO;
     @RequestMapping(method = RequestMethod.GET)
     public String initializeForm(@ModelAttribute("searchResult") Person person) {
         return "userHome";
@@ -31,7 +33,7 @@ public class RestaurantSearchController {
         ModelAndView mv = new ModelAndView();
         try {
             System.out.print("test");
-            RestaurantDAO restDAO = new RestaurantDAO();
+
             System.out.print("test1");
             List<Restaurant> restList=restDAO.getAll();
 
@@ -45,7 +47,7 @@ public class RestaurantSearchController {
                 return mv;
             }
 
-        } catch (ProjException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
 
             mv.addObject("searchSuccess",null);
